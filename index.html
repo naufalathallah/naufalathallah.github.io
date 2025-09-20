@@ -45,9 +45,15 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             overflow-x: hidden;
-            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400% 400%;
-            animation: gradientShift 10s ease infinite;
+            background: linear-gradient(45deg,
+                #ff0000, #ff1a00, #ff3300, #ff4d00, #ff6600, #ff8000, #ff9900, #ffb300, #ffcc00, #ffe600, #ffff00,
+                #e6ff00, #ccff00, #b3ff00, #99ff00, #80ff00, #66ff00, #4dff00, #33ff00, #1aff00, #00ff00,
+                #00ff1a, #00ff33, #00ff4d, #00ff66, #00ff80, #00ff99, #00ffb3, #00ffcc, #00ffe6, #00ffff,
+                #00e6ff, #00ccff, #00b3ff, #0099ff, #0080ff, #0066ff, #004dff, #0033ff, #001aff, #0000ff,
+                #1a00ff, #3300ff, #4d00ff, #6600ff, #8000ff, #9900ff, #b300ff, #cc00ff, #e600ff, #ff00ff,
+                #ff00e6, #ff00cc, #ff00b3, #ff0099, #ff0080, #ff0066, #ff004d, #ff0033, #ff001a, #ff0000);
+            background-size: 2000% 2000%;
+            animation: gradientShift 0.8s ease infinite;
             min-height: 100vh;
             position: relative;
         }
@@ -160,15 +166,145 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00cc, #cc00ff, #0066ff, #ff6600, #ff00ff);
             border-radius: 20px;
             z-index: -1;
-            animation: borderRotate 4s linear infinite;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        /* Different border animations for different sections */
+        section:nth-child(odd)::before {
+            animation: borderRotateReverse 2s linear infinite;
+            background: linear-gradient(90deg, #ff0080, #80ff00, #0080ff, #ff8000, #8000ff, #00ff80, #ff0080);
+        }
+
+        section:nth-child(even)::before {
+            animation: borderPulseRotate 2.5s ease-in-out infinite;
+            background: conic-gradient(#ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3, #ff0000);
+        }
+
+        section:nth-child(3n)::before {
+            animation: borderZigzag 3s linear infinite;
+            background: linear-gradient(135deg, #ff1493, #00bfff, #32cd32, #ffd700, #ff6347, #ff1493);
+            border-radius: 0;
+            clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+        }
+
+        section:nth-child(4n)::before {
+            animation: borderWave 2s ease-in-out infinite;
+            background: radial-gradient(circle, #ff69b4, #00ced1, #ff1493, #00ffff, #ff69b4);
+            border-radius: 50% 20% 50% 20%;
+        }
+
+        section:nth-child(5n)::before {
+            animation: borderDiamond 4s linear infinite;
+            background: linear-gradient(45deg, #dc143c, #ffa500, #ffff00, #32cd32, #1e90ff, #8a2be2, #dc143c);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            border-radius: 0;
         }
 
         @keyframes borderRotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.02); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
+
+        @keyframes borderRotateReverse {
+            0% { transform: rotate(360deg) scale(1); }
+            50% { transform: rotate(180deg) scale(0.98); }
+            100% { transform: rotate(0deg) scale(1); }
+        }
+
+        @keyframes borderPulseRotate {
+            0% {
+                transform: rotate(0deg) scale(1);
+                filter: hue-rotate(0deg);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.05);
+                filter: hue-rotate(90deg);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+                filter: hue-rotate(180deg);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.05);
+                filter: hue-rotate(270deg);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        @keyframes borderZigzag {
+            0% {
+                transform: rotate(0deg) skew(0deg);
+                clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+            }
+            25% {
+                transform: rotate(90deg) skew(5deg);
+                clip-path: polygon(10% 0, 100% 0%, 100% 90%, 0% 100%);
+            }
+            50% {
+                transform: rotate(180deg) skew(0deg);
+                clip-path: polygon(0 10%, 90% 0%, 100% 100%, 10% 90%);
+            }
+            75% {
+                transform: rotate(270deg) skew(-5deg);
+                clip-path: polygon(0% 0, 90% 10%, 100% 100%, 0% 90%);
+            }
+            100% {
+                transform: rotate(360deg) skew(0deg);
+                clip-path: polygon(0 0, 100% 10%, 90% 100%, 10% 90%);
+            }
+        }
+
+        @keyframes borderWave {
+            0% {
+                transform: rotate(0deg) scale(1);
+                border-radius: 50% 20% 50% 20%;
+            }
+            25% {
+                transform: rotate(90deg) scale(1.03);
+                border-radius: 20% 50% 20% 50%;
+            }
+            50% {
+                transform: rotate(180deg) scale(1.06);
+                border-radius: 60% 10% 60% 10%;
+            }
+            75% {
+                transform: rotate(270deg) scale(1.03);
+                border-radius: 10% 60% 10% 60%;
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+                border-radius: 50% 20% 50% 20%;
+            }
+        }
+
+        @keyframes borderDiamond {
+            0% {
+                transform: rotate(0deg) scale(1);
+                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            }
+            25% {
+                transform: rotate(45deg) scale(1.02);
+                clip-path: polygon(30% 0%, 100% 30%, 70% 100%, 0% 70%);
+            }
+            50% {
+                transform: rotate(90deg) scale(1.04);
+                clip-path: polygon(50% 10%, 90% 50%, 50% 90%, 10% 50%);
+            }
+            75% {
+                transform: rotate(135deg) scale(1.02);
+                clip-path: polygon(70% 0%, 100% 70%, 30% 100%, 0% 30%);
+            }
+            100% {
+                transform: rotate(180deg) scale(1);
+                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            }
         }
 
         /* Typography */
@@ -414,12 +550,96 @@
             animation-delay: 4.5s;
         }
 
+        /* Different floating animations for each icon */
+        .floating-icon:nth-child(1) {
+            animation: floatSpin 6s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(2) {
+            animation: floatZoom 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(3) {
+            animation: floatWiggle 5s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(4) {
+            animation: floatPulse 3s ease-in-out infinite;
+        }
+
         @keyframes float {
             0%, 100% {
                 transform: translateY(0px) rotate(0deg);
             }
             50% {
                 transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        @keyframes floatSpin {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translateY(-15px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translateY(-30px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translateY(-15px) rotate(270deg) scale(1.2);
+            }
+        }
+
+        @keyframes floatZoom {
+            0%, 100% {
+                transform: translateX(0px) scale(1) rotateY(0deg);
+            }
+            25% {
+                transform: translateX(-10px) scale(1.3) rotateY(90deg);
+            }
+            50% {
+                transform: translateX(0px) scale(0.7) rotateY(180deg);
+            }
+            75% {
+                transform: translateX(10px) scale(1.5) rotateY(270deg);
+            }
+        }
+
+        @keyframes floatWiggle {
+            0%, 100% {
+                transform: translateY(0px) skew(0deg) scale(1);
+            }
+            20% {
+                transform: translateY(-10px) skew(5deg) scale(1.1);
+            }
+            40% {
+                transform: translateY(-20px) skew(-3deg) scale(0.9);
+            }
+            60% {
+                transform: translateY(-15px) skew(7deg) scale(1.2);
+            }
+            80% {
+                transform: translateY(-5px) skew(-2deg) scale(0.8);
+            }
+        }
+
+        @keyframes floatPulse {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                filter: hue-rotate(0deg);
+            }
+            25% {
+                transform: scale(1.4) rotate(45deg);
+                filter: hue-rotate(90deg);
+            }
+            50% {
+                transform: scale(0.6) rotate(90deg);
+                filter: hue-rotate(180deg);
+            }
+            75% {
+                transform: scale(1.8) rotate(135deg);
+                filter: hue-rotate(270deg);
             }
         }
 
@@ -473,6 +693,36 @@
             animation: pulsate 2s ease-in-out infinite;
         }
 
+        /* Add multiple animated shapes to the summary visual */
+        .summary-visual {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .summary-visual::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.6), transparent);
+            border-radius: 50%;
+            animation: zoomInOut 3s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .summary-visual::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: conic-gradient(#ff0080, #80ff00, #0080ff, #ff8000, #ff0080);
+            border-radius: 50%;
+            animation: zoomRotate 4s ease-in-out infinite;
+            z-index: 0;
+        }
+
         @keyframes pulsate {
             0% {
                 transform: scale(1);
@@ -485,6 +735,44 @@
             100% {
                 transform: scale(1);
                 box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+            }
+        }
+
+        @keyframes zoomInOut {
+            0% {
+                transform: scale(0.5) rotate(0deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.5) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(0.5) rotate(360deg);
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes zoomRotate {
+            0% {
+                transform: scale(0.8) rotate(0deg);
+                opacity: 0.3;
+            }
+            25% {
+                transform: scale(1.2) rotate(90deg);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(0.6) rotate(180deg);
+                opacity: 0.9;
+            }
+            75% {
+                transform: scale(1.4) rotate(270deg);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(0.8) rotate(360deg);
+                opacity: 0.3;
             }
         }
 
@@ -720,10 +1008,57 @@
             animation: bounce 2s ease-in-out infinite;
         }
 
+        /* Different animations for education icons */
+        .education-item:nth-child(1) .education-icon {
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .education-item:nth-child(2) .education-icon {
+            animation: educationSpin 3s ease-in-out infinite;
+        }
+
+        .education-item:nth-child(3) .education-icon {
+            animation: educationFlip 4s ease-in-out infinite;
+        }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
+        }
+
+        @keyframes educationSpin {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+                filter: brightness(1);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.2);
+                filter: brightness(1.3);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.8);
+                filter: brightness(0.7);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.4);
+                filter: brightness(1.5);
+            }
+        }
+
+        @keyframes educationFlip {
+            0%, 100% {
+                transform: rotateY(0deg) scale(1);
+            }
+            25% {
+                transform: rotateY(90deg) scale(1.1);
+            }
+            50% {
+                transform: rotateY(180deg) scale(0.9);
+            }
+            75% {
+                transform: rotateY(270deg) scale(1.3);
+            }
         }
 
         .education-item h3 {
@@ -789,9 +1124,79 @@
             animation: projectIconSpin 4s ease-in-out infinite;
         }
 
+        /* Different animations for project icons */
+        .project-card:nth-child(odd) .project-icon {
+            animation: projectIconSpin 4s ease-in-out infinite;
+        }
+
+        .project-card:nth-child(even) .project-icon {
+            animation: projectIconZoomSpin 3s ease-in-out infinite;
+        }
+
+        .project-card:nth-child(3n) .project-icon {
+            animation: projectIconBounce 2s ease-in-out infinite;
+        }
+
+        .project-card:nth-child(4n) .project-icon {
+            animation: projectIconWobble 3.5s ease-in-out infinite;
+        }
+
         @keyframes projectIconSpin {
             0%, 100% { transform: rotate(0deg); }
             50% { transform: rotate(180deg); }
+        }
+
+        @keyframes projectIconZoomSpin {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.3);
+            }
+            50% {
+                transform: rotate(180deg) scale(0.7);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.5);
+            }
+        }
+
+        @keyframes projectIconBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1) rotateX(0deg);
+            }
+            25% {
+                transform: translateY(-10px) scale(1.1) rotateX(45deg);
+            }
+            50% {
+                transform: translateY(-20px) scale(0.9) rotateX(90deg);
+            }
+            75% {
+                transform: translateY(-5px) scale(1.2) rotateX(135deg);
+            }
+        }
+
+        @keyframes projectIconWobble {
+            0%, 100% {
+                transform: skew(0deg) scale(1);
+                filter: hue-rotate(0deg);
+            }
+            20% {
+                transform: skew(5deg) scale(1.1);
+                filter: hue-rotate(72deg);
+            }
+            40% {
+                transform: skew(-3deg) scale(0.9);
+                filter: hue-rotate(144deg);
+            }
+            60% {
+                transform: skew(7deg) scale(1.2);
+                filter: hue-rotate(216deg);
+            }
+            80% {
+                transform: skew(-2deg) scale(0.8);
+                filter: hue-rotate(288deg);
+            }
         }
 
         .project-card h3 {
@@ -1242,7 +1647,7 @@
                     <span class="typewriter" data-text="Expert in TypeScript • Go • Groovy • YAML • Automation Testing"></span>
                 </div>
                 <div class="contact-buttons">
-                    <a href="mailto:contact@naufalathallah.dev" class="contact-btn neon-btn">
+                    <a href="mailto:naufalaiwel@gmail.com" class="contact-btn neon-btn">
                         <i class="fas fa-envelope"></i> Email
                     </a>
                     <a href="https://www.linkedin.com/in/naufalathallahiwel/" target="_blank" class="contact-btn neon-btn">
@@ -1268,8 +1673,7 @@
                 <div class="summary-text">
                     <p class="highlight-text">SDET with strong software development background. Experienced in manual and automated testing across multiple platforms.</p>
                     <div class="achievement-highlight">
-                        <span class="big-number" data-target="80">0</span>
-                        <span class="achievement-text">% Reduction in Testing Time</span>
+                        <span class="achievement-text">Helps you build test architectures that scale and perform.</span>
                     </div>
                     <p>Proven ability to optimize testing processes and enhance CI/CD integration with cutting-edge automation frameworks.</p>
                 </div>
@@ -1310,7 +1714,17 @@
                     <div class="timeline-content">
                         <h3>GUE Ecosystem</h3>
                         <h4>QA Engineer</h4>
-                        <p>Implemented comprehensive testing strategies for ecosystem applications.</p>
+                        <div class="highlight-achievement">
+                            <i class="fas fa-star"></i>
+                            <span>Built comprehensive test automation framework from scratch</span>
+                        </div>
+                        <p>Implemented comprehensive testing strategies for ecosystem applications with full API and UI automation coverage.</p>
+                        <ul class="tech-stack">
+                            <li><span class="tech-tag">Playwright</span></li>
+                            <li><span class="tech-tag">API Testing</span></li>
+                            <li><span class="tech-tag">Test Architecture</span></li>
+                            <li><span class="tech-tag">CI/CD</span></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1319,7 +1733,16 @@
                     <div class="timeline-content">
                         <h3>e-Spaces London</h3>
                         <h4>QA Specialist</h4>
-                        <p>Specialized in quality assurance for international client projects.</p>
+                        <div class="highlight-achievement">
+                            <i class="fas fa-globe"></i>
+                            <span>Led quality assurance for international client projects</span>
+                        </div>
+                        <p>Specialized in cross-platform testing and international compliance requirements.</p>
+                        <ul class="tech-stack">
+                            <li><span class="tech-tag">Cross-Platform Testing</span></li>
+                            <li><span class="tech-tag">International Standards</span></li>
+                            <li><span class="tech-tag">Quality Assurance</span></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1328,7 +1751,17 @@
                     <div class="timeline-content">
                         <h3>Klinik Pintar</h3>
                         <h4>QA Engineer</h4>
-                        <p>Quality assurance for healthcare technology applications.</p>
+                        <div class="highlight-achievement">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Ensured healthcare application reliability and compliance</span>
+                        </div>
+                        <p>Quality assurance for critical healthcare technology applications with focus on data security and patient safety.</p>
+                        <ul class="tech-stack">
+                            <li><span class="tech-tag">Healthcare Compliance</span></li>
+                            <li><span class="tech-tag">Data Security Testing</span></li>
+                            <li><span class="tech-tag">Mobile Testing</span></li>
+                            <li><span class="tech-tag">API Security</span></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -1337,7 +1770,17 @@
                     <div class="timeline-content">
                         <h3>KAI Commuter</h3>
                         <h4>IT Developer</h4>
-                        <p>Developed and maintained transportation system applications.</p>
+                        <div class="highlight-achievement">
+                            <i class="fas fa-train"></i>
+                            <span>Developed high-traffic transportation system applications</span>
+                        </div>
+                        <p>Developed and maintained critical transportation system applications serving millions of commuters.</p>
+                        <ul class="tech-stack">
+                            <li><span class="tech-tag">System Development</span></li>
+                            <li><span class="tech-tag">High-Traffic Systems</span></li>
+                            <li><span class="tech-tag">Performance Testing</span></li>
+                            <li><span class="tech-tag">Database Management</span></li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -1422,6 +1865,42 @@
             <h2 class="section-title">ACHIEVEMENTS & PROJECTS</h2>
             <div class="projects-grid">
                 <div class="project-card" data-aos="flip-left">
+                    <div class="project-icon">🦁</div>
+                    <h3>Lion Parcel CA (Customer App)</h3>
+                    <p>Complete test automation for Lion Parcel's customer-facing mobile and web application</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">Mobile Testing</span>
+                        <span class="tech-tag">API Testing</span>
+                        <span class="tech-tag">Performance</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="flip-left">
+                    <div class="project-icon">🚛</div>
+                    <h3>Lion Parcel DA (Driver App)</h3>
+                    <p>End-to-end testing framework for driver application ensuring reliable delivery operations</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Go</span>
+                        <span class="tech-tag">Real-time Testing</span>
+                        <span class="tech-tag">GPS Integration</span>
+                        <span class="tech-tag">Mobile E2E</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="flip-left">
+                    <div class="project-icon">⚡</div>
+                    <h3>Lion Parcel Genesis</h3>
+                    <p>Advanced logistics management system with comprehensive automation testing coverage</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Robot Framework</span>
+                        <span class="tech-tag">Jenkins</span>
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Microservices</span>
+                    </div>
+                </div>
+
+                <div class="project-card" data-aos="flip-left">
                     <div class="project-icon">🏠</div>
                     <h3>Homecare Automation</h3>
                     <p>Comprehensive test automation suite for healthcare management system</p>
@@ -1452,12 +1931,13 @@
                 </div>
 
                 <div class="project-card" data-aos="flip-left">
-                    <div class="project-icon">⚡</div>
+                    <div class="project-icon">📊</div>
                     <h3>Performance Testing Suite</h3>
-                    <p>Advanced performance testing framework using K6 for load testing</p>
+                    <p>Advanced performance testing framework using K6 for load testing across multiple systems</p>
                     <div class="project-tech">
                         <span class="tech-tag">K6</span>
                         <span class="tech-tag">Jenkins</span>
+                        <span class="tech-tag">Monitoring</span>
                     </div>
                 </div>
 
@@ -1474,7 +1954,7 @@
                 <div class="project-card" data-aos="flip-left">
                     <div class="project-icon">🔄</div>
                     <h3>Process Optimization</h3>
-                    <p>Streamlined testing processes resulting in 80%+ time reduction</p>
+                    <p>Streamlined testing processes resulting in 80%+ time reduction across all projects</p>
                     <div class="project-tech">
                         <span class="tech-tag">Process Improvement</span>
                         <span class="tech-tag">CI/CD</span>
@@ -1488,7 +1968,7 @@
             <div class="footer-content">
                 <p class="matrix-text">READY TO OPTIMIZE YOUR TESTING PROCESSES?</p>
                 <div class="footer-links">
-                    <a href="mailto:contact@naufalathallah.dev" class="footer-link">
+                    <a href="mailto:naufalaiwel@gmail.com" class="footer-link">
                         <i class="fas fa-envelope"></i> Get In Touch
                     </a>
                 </div>
@@ -1543,18 +2023,53 @@
                 this.ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-                this.ctx.fillStyle = '#0F0';
                 this.ctx.font = this.fontSize + 'px monospace';
 
                 for(let i = 0; i < this.drops.length; i++) {
                     const text = this.matrix[Math.floor(Math.random() * this.matrix.length)];
-                    this.ctx.fillText(text, i * this.fontSize, this.drops[i] * this.fontSize);
+
+                    // Create rainbow colors using HSL for smooth transitions
+                    const time = Date.now() * 0.002;
+                    const hue = (i * 10 + time * 100) % 360;
+                    const saturation = 100;
+                    const lightness = 50 + 30 * Math.sin(time * 3 + i * 0.1);
+
+                    const currentColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+
+                    // Vary intensity based on position and time
+                    const intensity = 0.7 + 0.3 * Math.sin(time * 4 + i * 0.2);
+                    const alpha = 0.5 + 0.5 * intensity;
+
+                    this.ctx.fillStyle = currentColor;
+
+                    // Add stronger glow effect with varying intensity
+                    this.ctx.shadowColor = currentColor;
+                    this.ctx.shadowBlur = 10 + intensity * 20;
+
+                    // Save current state
+                    this.ctx.save();
+                    this.ctx.globalAlpha = alpha;
+
+                    // Random scale variation for more dynamic effect
+                    const scale = 0.8 + 0.4 * Math.random();
+                    this.ctx.scale(scale, scale);
+
+                    const x = (i * this.fontSize) / scale;
+                    const y = (this.drops[i] * this.fontSize) / scale;
+
+                    this.ctx.fillText(text, x, y);
+
+                    // Restore state
+                    this.ctx.restore();
 
                     if(this.drops[i] * this.fontSize > this.canvas.height && Math.random() > 0.975) {
                         this.drops[i] = 0;
                     }
                     this.drops[i]++;
                 }
+
+                // Reset shadow for next frame
+                this.ctx.shadowBlur = 0;
 
                 requestAnimationFrame(() => this.draw());
             }
@@ -1759,7 +2274,15 @@
 
                     this.ctx.save();
                     this.ctx.globalAlpha = particle.life;
-                    this.ctx.fillStyle = `hsl(${(particle.x + particle.y) % 360}, 70%, 60%)`;
+
+                    // More vibrant colors that change over time
+                    const hue = (particle.x + particle.y + Date.now() * 0.1) % 360;
+                    this.ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
+
+                    // Add glow effect to particles
+                    this.ctx.shadowColor = `hsl(${hue}, 100%, 60%)`;
+                    this.ctx.shadowBlur = 15;
+
                     this.ctx.beginPath();
                     this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                     this.ctx.fill();
