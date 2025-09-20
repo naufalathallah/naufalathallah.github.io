@@ -1449,6 +1449,108 @@
         transform: scale(1.05);
       }
 
+      .pal-ghibli-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        margin: 40px 0 20px 0;
+      }
+
+      .pal-ghibli-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid #00ffff;
+        box-shadow:
+          0 0 30px #00ffff,
+          0 0 60px #ff00ff,
+          0 0 90px #ffff00;
+        animation: ghibliFloat 3s ease-in-out infinite, rainbowGlow 2s linear infinite;
+        transition: transform 0.3s ease;
+        object-fit: cover;
+      }
+
+      .pal-ghibli-image:hover {
+        transform: scale(1.2) rotate(15deg);
+        animation: ghibliSpin 1s linear infinite, rainbowGlow 0.5s linear infinite;
+      }
+
+      @keyframes ghibliFloat {
+        0%, 100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-15px) rotate(5deg);
+        }
+        50% {
+          transform: translateY(-25px) rotate(0deg);
+        }
+        75% {
+          transform: translateY(-10px) rotate(-5deg);
+        }
+      }
+
+      @keyframes ghibliSpin {
+        0% {
+          transform: scale(1.2) rotate(0deg);
+        }
+        100% {
+          transform: scale(1.2) rotate(360deg);
+        }
+      }
+
+      @keyframes rainbowGlow {
+        0% {
+          box-shadow:
+            0 0 30px #ff0000,
+            0 0 60px #ff0000,
+            0 0 90px #ff0000;
+          border-color: #ff0000;
+        }
+        16.66% {
+          box-shadow:
+            0 0 30px #ff8000,
+            0 0 60px #ff8000,
+            0 0 90px #ff8000;
+          border-color: #ff8000;
+        }
+        33.33% {
+          box-shadow:
+            0 0 30px #ffff00,
+            0 0 60px #ffff00,
+            0 0 90px #ffff00;
+          border-color: #ffff00;
+        }
+        50% {
+          box-shadow:
+            0 0 30px #00ff00,
+            0 0 60px #00ff00,
+            0 0 90px #00ff00;
+          border-color: #00ff00;
+        }
+        66.66% {
+          box-shadow:
+            0 0 30px #00ffff,
+            0 0 60px #00ffff,
+            0 0 90px #00ffff;
+          border-color: #00ffff;
+        }
+        83.33% {
+          box-shadow:
+            0 0 30px #8000ff,
+            0 0 60px #8000ff,
+            0 0 90px #8000ff;
+          border-color: #8000ff;
+        }
+        100% {
+          box-shadow:
+            0 0 30px #ff0080,
+            0 0 60px #ff0080,
+            0 0 90px #ff0080;
+          border-color: #ff0080;
+        }
+      }
+
       .copyright {
         color: rgba(255, 255, 255, 0.6);
         font-size: 0.9rem;
@@ -1591,6 +1693,11 @@
           font-size: 1rem;
           padding: 12px 25px;
         }
+
+        .pal-ghibli-image {
+          width: 100px;
+          height: 100px;
+        }
       }
 
       @media (max-width: 480px) {
@@ -1648,6 +1755,11 @@
 
         .project-icon {
           font-size: 2.5rem;
+        }
+
+        .pal-ghibli-image {
+          width: 80px;
+          height: 80px;
         }
 
         .project-card h3 {
@@ -2123,6 +2235,9 @@
             <a href="mailto:naufalaiwel@gmail.com" class="footer-link">
               <i class="fas fa-envelope"></i> Get In Touch
             </a>
+          </div>
+          <div class="pal-ghibli-container">
+            <img src="assets/pal-ghibli.png" alt="Naufal Athallah Iwel - Pal Ghibli Style" class="pal-ghibli-image" title="Naufal Athallah Iwel - SDET Extraordinaire">
           </div>
           <p class="copyright">© 2024 Naufal Athallah Iwel. Engineered for Excellence.</p>
         </div>
