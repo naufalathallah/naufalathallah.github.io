@@ -2666,7 +2666,7 @@
         }
       }
 
-      // Audio Visualization (Optional)
+      // Audio Visualization (Optional) - DISABLED to avoid microphone access
       class AudioVisualizer {
         constructor() {
           this.isEnabled = false;
@@ -2676,21 +2676,25 @@
         }
 
         async init() {
-          try {
-            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            this.analyser = this.audioContext.createAnalyser();
-            this.analyser.fftSize = 256;
-            this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+          // DISABLED: This method previously requested microphone access
+          // which caused the browser to prompt for microphone permissions
+          console.log("Audio visualization disabled to avoid microphone access");
+          return;
 
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const source = this.audioContext.createMediaStreamSource(stream);
-            source.connect(this.analyser);
-
-            this.isEnabled = true;
-            this.visualize();
-          } catch (error) {
-            console.log("Audio visualization not available");
-          }
+          // Original code that requested microphone access:
+          // try {
+          //   this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+          //   this.analyser = this.audioContext.createAnalyser();
+          //   this.analyser.fftSize = 256;
+          //   this.dataArray = new Uint8Array(this.analyser.frequencyBinCount);
+          //   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+          //   const source = this.audioContext.createMediaStreamSource(stream);
+          //   source.connect(this.analyser);
+          //   this.isEnabled = true;
+          //   this.visualize();
+          // } catch (error) {
+          //   console.log("Audio visualization not available");
+          // }
         }
 
         visualize() {
@@ -2831,19 +2835,19 @@
         // Initialize Floating Sound Button
         new FloatingSoundButton();
 
-        // Initialize Audio Visualizer (optional)
-        const audioVisualizer = new AudioVisualizer();
+        // Initialize Audio Visualizer (optional) - DISABLED to avoid microphone access
+        // const audioVisualizer = new AudioVisualizer();
 
-        // Add click event for audio visualization
-        document.addEventListener(
-          "click",
-          () => {
-            if (!audioVisualizer.isEnabled) {
-              audioVisualizer.init();
-            }
-          },
-          { once: true }
-        );
+        // Add click event for audio visualization - DISABLED
+        // document.addEventListener(
+        //   "click",
+        //   () => {
+        //     if (!audioVisualizer.isEnabled) {
+        //       audioVisualizer.init();
+        //     }
+        //   },
+        //   { once: true }
+        // );
 
         // Enhanced button interactions
         const neonButtons = document.querySelectorAll(".neon-btn, .footer-link");
