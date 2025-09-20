@@ -1461,10 +1461,7 @@
         height: 120px;
         border-radius: 50%;
         border: 4px solid #00ffff;
-        box-shadow:
-          0 0 30px #00ffff,
-          0 0 60px #ff00ff,
-          0 0 90px #ffff00;
+        box-shadow: 0 0 30px #00ffff, 0 0 60px #ff00ff, 0 0 90px #ffff00;
         animation: ghibliFloat 3s ease-in-out infinite, rainbowGlow 2s linear infinite;
         transition: transform 0.3s ease;
         object-fit: cover;
@@ -1476,7 +1473,8 @@
       }
 
       @keyframes ghibliFloat {
-        0%, 100% {
+        0%,
+        100% {
           transform: translateY(0px) rotate(0deg);
         }
         25% {
@@ -1501,52 +1499,31 @@
 
       @keyframes rainbowGlow {
         0% {
-          box-shadow:
-            0 0 30px #ff0000,
-            0 0 60px #ff0000,
-            0 0 90px #ff0000;
+          box-shadow: 0 0 30px #ff0000, 0 0 60px #ff0000, 0 0 90px #ff0000;
           border-color: #ff0000;
         }
         16.66% {
-          box-shadow:
-            0 0 30px #ff8000,
-            0 0 60px #ff8000,
-            0 0 90px #ff8000;
+          box-shadow: 0 0 30px #ff8000, 0 0 60px #ff8000, 0 0 90px #ff8000;
           border-color: #ff8000;
         }
         33.33% {
-          box-shadow:
-            0 0 30px #ffff00,
-            0 0 60px #ffff00,
-            0 0 90px #ffff00;
+          box-shadow: 0 0 30px #ffff00, 0 0 60px #ffff00, 0 0 90px #ffff00;
           border-color: #ffff00;
         }
         50% {
-          box-shadow:
-            0 0 30px #00ff00,
-            0 0 60px #00ff00,
-            0 0 90px #00ff00;
+          box-shadow: 0 0 30px #00ff00, 0 0 60px #00ff00, 0 0 90px #00ff00;
           border-color: #00ff00;
         }
         66.66% {
-          box-shadow:
-            0 0 30px #00ffff,
-            0 0 60px #00ffff,
-            0 0 90px #00ffff;
+          box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff, 0 0 90px #00ffff;
           border-color: #00ffff;
         }
         83.33% {
-          box-shadow:
-            0 0 30px #8000ff,
-            0 0 60px #8000ff,
-            0 0 90px #8000ff;
+          box-shadow: 0 0 30px #8000ff, 0 0 60px #8000ff, 0 0 90px #8000ff;
           border-color: #8000ff;
         }
         100% {
-          box-shadow:
-            0 0 30px #ff0080,
-            0 0 60px #ff0080,
-            0 0 90px #ff0080;
+          box-shadow: 0 0 30px #ff0080, 0 0 60px #ff0080, 0 0 90px #ff0080;
           border-color: #ff0080;
         }
       }
@@ -1930,6 +1907,121 @@
         background: #ff00ff;
         color: #000;
       }
+
+      /* Floating Sound Button */
+      .floating-sound-btn {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #ff00ff, #00ffff);
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        cursor: pointer;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: #fff;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        box-shadow: 0 8px 25px rgba(255, 0, 255, 0.4);
+        animation: soundBtnFloat 3s ease-in-out infinite;
+        bottom: 30px;
+        right: 30px;
+      }
+
+      .floating-sound-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 35px rgba(255, 0, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
+      }
+
+      .floating-sound-btn.position-1 {
+        bottom: 30px;
+        right: 30px;
+        animation: moveToPosition1 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.position-2 {
+        bottom: 30px;
+        right: 100px;
+        animation: moveToPosition2 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.position-3 {
+        bottom: 100px;
+        right: 30px;
+        animation: moveToPosition3 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.muted {
+        background: linear-gradient(45deg, #666, #999);
+        animation: mutedPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes soundBtnFloat {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-5px) rotate(2deg);
+        }
+        50% {
+          transform: translateY(-10px) rotate(0deg);
+        }
+        75% {
+          transform: translateY(-5px) rotate(-2deg);
+        }
+      }
+
+      .floating-sound-btn.top-left {
+        top: 30px;
+        left: 30px;
+        bottom: auto;
+        right: auto;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.top-right {
+        top: 30px;
+        right: 30px;
+        bottom: auto;
+        left: auto;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.bottom-left {
+        bottom: 30px;
+        left: 30px;
+        top: auto;
+        right: auto;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      .floating-sound-btn.bottom-right {
+        bottom: 30px;
+        right: 30px;
+        top: auto;
+        left: auto;
+        transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      }
+
+      @keyframes mutedPulse {
+        0%,
+        100% {
+          opacity: 0.7;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.95);
+        }
+      }
+
+      /* Audio element styling */
+      #backgroundAudio {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -1941,6 +2033,18 @@
           <div class="progress-fill"></div>
         </div>
       </div>
+    </div>
+
+    <!-- Background Audio -->
+    <audio id="backgroundAudio" loop>
+      <!-- Add your audio source here -->
+      <source src="assets/background-music.mp3" type="audio/mpeg" />
+      <!-- <source src="assets/background-music.ogg" type="audio/ogg"> -->
+    </audio>
+
+    <!-- Floating Sound Button -->
+    <div class="floating-sound-btn" id="soundToggle">
+      <i class="fas fa-volume-up" id="soundIcon"></i>
     </div>
 
     <!-- Main Content -->
@@ -2210,7 +2314,7 @@
           <div class="project-card" data-aos="flip-left">
             <div class="project-icon">📦</div>
             <h3>FedEx Collection System</h3>
-            <p>End-to-end testing solution for FedEx collection and tracking system at WNLAW law firm</p>
+            <p>Digitalization solution for FedEx collection and tracking system at WNLAW law firm</p>
           </div>
 
           <div class="project-card" data-aos="flip-left">
@@ -2237,7 +2341,12 @@
             </a>
           </div>
           <div class="pal-ghibli-container">
-            <img src="assets/pal-ghibli.png" alt="Naufal Athallah Iwel - Pal Ghibli Style" class="pal-ghibli-image" title="Naufal Athallah Iwel - SDET Extraordinaire">
+            <img
+              src="assets/pal-ghibli.png"
+              alt="Naufal Athallah Iwel - Pal Ghibli Style"
+              class="pal-ghibli-image"
+              title="Naufal Athallah Iwel - SDET Extraordinaire"
+            />
           </div>
           <p class="copyright">© 2024 Naufal Athallah Iwel. Engineered for Excellence.</p>
         </div>
@@ -2722,6 +2831,9 @@
         // Initialize Konami Code Easter Egg
         new KonamiCode();
 
+        // Initialize Floating Sound Button
+        new FloatingSoundButton();
+
         // Initialize Audio Visualizer (optional)
         const audioVisualizer = new AudioVisualizer();
 
@@ -2912,6 +3024,156 @@
       window.addEventListener("error", function (e) {
         console.log("An error occurred:", e.error);
       });
+
+      // Floating Sound Button with 3-click behavior
+      class FloatingSoundButton {
+        constructor() {
+          this.audio = document.getElementById("backgroundAudio");
+          this.button = document.getElementById("soundToggle");
+          this.icon = document.getElementById("soundIcon");
+          this.clickCount = 0;
+          this.cornerPositions = ["top-left", "top-right", "bottom-left", "bottom-right"];
+          this.currentPosition = "bottom-right"; // Start at bottom-right
+          this.isMuted = false; // Start unmuted so music plays immediately
+
+          // Set initial state
+          this.audio.muted = false;
+          this.audio.volume = 0.3; // Set volume to 30%
+
+          this.init();
+        }
+
+        init() {
+          this.button.addEventListener("click", () => this.handleClick());
+
+          // Auto-start music on ANY user interaction
+          this.setupAutoPlay();
+
+          // Handle audio events
+          this.audio.addEventListener("loadstart", () => {
+            console.log("Audio loading started");
+          });
+
+          this.audio.addEventListener("canplaythrough", () => {
+            console.log("Audio can play through");
+          });
+
+          this.audio.addEventListener("error", (e) => {
+            console.log("Audio error:", e);
+            // Hide button if no audio available
+            this.button.style.display = "none";
+          });
+        }
+
+        setupAutoPlay() {
+          const events = ["click", "touchstart", "keydown", "mousemove", "scroll"];
+
+          const startMusicOnce = async () => {
+            try {
+              await this.audio.play();
+              console.log("Music started successfully");
+
+              // Remove all event listeners once music starts
+              events.forEach((event) => {
+                document.removeEventListener(event, startMusicOnce);
+              });
+            } catch (error) {
+              console.log("Auto-play still prevented:", error);
+            }
+          };
+
+          // Add listeners for multiple types of user interaction
+          events.forEach((event) => {
+            document.addEventListener(event, startMusicOnce, { once: true });
+          });
+
+          // Also try immediate play (might work in some browsers)
+          this.immediatePlay();
+        }
+
+        async immediatePlay() {
+          try {
+            await this.audio.play();
+            console.log("Immediate play successful");
+          } catch (error) {
+            console.log("Immediate play prevented - waiting for user interaction");
+          }
+        }
+
+        handleClick() {
+          this.clickCount++;
+
+          if (this.clickCount <= 2) {
+            // First and second click: change position
+            this.changePosition();
+          } else if (this.clickCount === 3) {
+            // Third click: toggle mute
+            this.toggleMute();
+            this.clickCount = 0; // Reset counter
+          }
+        }
+
+        changePosition() {
+          // Remove current position class
+          this.button.classList.remove(this.currentPosition);
+
+          // Get available positions (exclude current position)
+          const availablePositions = this.cornerPositions.filter((pos) => pos !== this.currentPosition);
+
+          // Randomly select a new position
+          const randomIndex = Math.floor(Math.random() * availablePositions.length);
+          this.currentPosition = availablePositions[randomIndex];
+
+          // Add new position class
+          this.button.classList.add(this.currentPosition);
+
+          // Add visual feedback
+          this.button.style.transform = "scale(0.9)";
+          setTimeout(() => {
+            this.button.style.transform = "";
+          }, 150);
+        }
+
+        async toggleMute() {
+          this.isMuted = !this.isMuted;
+
+          if (this.isMuted) {
+            // Mute audio
+            this.audio.pause();
+            this.audio.muted = true;
+            this.icon.className = "fas fa-volume-mute";
+            this.button.classList.add("muted");
+
+            // Add mute effect
+            this.button.style.transform = "scale(0.8)";
+            setTimeout(() => {
+              this.button.style.transform = "";
+            }, 200);
+          } else {
+            // Unmute and play audio
+            this.audio.muted = false;
+            this.icon.className = "fas fa-volume-up";
+            this.button.classList.remove("muted");
+
+            // Add unmute effect
+            this.button.style.transform = "scale(1.2)";
+            setTimeout(() => {
+              this.button.style.transform = "";
+            }, 200);
+
+            try {
+              await this.audio.play();
+            } catch (error) {
+              console.log("Play failed:", error);
+              // Revert to muted state if play fails
+              this.isMuted = true;
+              this.audio.muted = true;
+              this.icon.className = "fas fa-volume-mute";
+              this.button.classList.add("muted");
+            }
+          }
+        }
+      }
 
       // Service Worker for offline functionality (optional)
       if ("serviceWorker" in navigator) {
