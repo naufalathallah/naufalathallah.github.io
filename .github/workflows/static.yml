@@ -41,3 +41,41 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Success notification
+      - name: Discord Success Notification
+        if: success()
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: https://discord.com/api/webhooks/1418989799444054036/EaHp_OVJAnpziDcfqdhyyBEZ8Bnuhu4e8ez-BHbdLy5pBMavIjqZ3pTIM12NHlMm0JjW
+        with:
+          args: |
+            🚀 **Deployment Successful!** ✅
+
+            📦 **Repository:** `${{ github.repository }}`
+            🌟 **Branch:** `${{ github.ref_name }}`
+            👤 **Triggered by:** ${{ github.actor }}
+            📝 **Commit:** [${{ github.sha }}](${{ github.event.head_commit.url }})
+            💬 **Message:** ${{ github.event.head_commit.message }}
+            🌐 **Live Site:** ${{ steps.deployment.outputs.page_url }}
+
+            ⏰ **Time:** ${{ github.event.head_commit.timestamp }}
+
+      # Failure notification
+      - name: Discord Failure Notification
+        if: failure()
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: https://discord.com/api/webhooks/1418989799444054036/EaHp_OVJAnpziDcfqdhyyBEZ8Bnuhu4e8ez-BHbdLy5pBMavIjqZ3pTIM12NHlMm0JjW
+        with:
+          args: |
+            💥 **Deployment Failed!** ❌
+
+            📦 **Repository:** `${{ github.repository }}`
+            🌟 **Branch:** `${{ github.ref_name }}`
+            👤 **Triggered by:** ${{ github.actor }}
+            📝 **Commit:** [${{ github.sha }}](${{ github.event.head_commit.url }})
+            💬 **Message:** ${{ github.event.head_commit.message }}
+            🔗 **Workflow:** [View Details](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            ⏰ **Time:** ${{ github.event.head_commit.timestamp }}
